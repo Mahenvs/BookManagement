@@ -26,7 +26,7 @@ public class BookController {
     @GetMapping("/getBook/{bookName}")
     public ResponseEntity<Book> getBookByName(@PathVariable ("bookName") String name){
         final Book book = bookService.getBookByName(name);
-        System.out.println(book);
+        
         return ResponseEntity.ok(book);
     }
 
