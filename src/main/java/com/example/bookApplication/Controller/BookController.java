@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/book/v1")
 public class BookController {
@@ -30,5 +32,16 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    public ResponseEntity<Book> updateBookGenre(@RequestBody()
+    @PutMapping("/updateBook")
+    public ResponseEntity<Book> updateBookGenre(@RequestBody Book book){
+        Book updatedBook = bookService.updateBook(book);
+        return ResponseEntity.ok(updatedBook);
+    }
+
+    @DeleteMapping("/deleteBook/{bookTitle}")
+    public ResponseEntity<List<Book>> deleteBookByTitle(@PathVariable ("bookTitle") String bookName){
+         bookService.deleteBookByTitle(bookName);
+        List<Book> currentBooks = bookService.getAllBooks();
+        return ResponseEntity.ok(currentBooks);
+    }
 }
